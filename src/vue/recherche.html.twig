@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Résultat de la recherche {% endblock %}
+
+{% block contenu %}
+    <h1>Résultat de la recherche</h1>
+    <div class="container-fluid">
+
+    {% if resultats %}
+        <div class="row">
+            {% for produit in resultats %}
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="card d-flex flex-column h-100">
+                        {% if produit.photo is not empty %}
+                            <img src="images/{{produit.photo}}" alt="Produit Image" class="mx-auto" style="max-width: 180px; max-height: 180px;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                            <p class="card-text">{{ produit.description }}</p>
+                            <p class="card-text fw-bold text-center">Prix: {{ produit.prix }}€</p>
+                            {%if session.login is defined %}
+                                {%if session.role == 1 %}
+                                    <a href="index.php?page=produit-modif&id={{ produit.id }}" class="btn btn-primary mt-auto mb-2">Détails (accessible uniquement aux adminstrateurs).</a>
+                                {% endif %}
+                            {% endif %}
+                            {%if session.login is defined %}
+                                {%if session.role == 2 %}
+                                    <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="id" value="{{ produit.id }}" />
+                                        <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% else %}
+    <p>Aucun résultat trouvé.</p>
+{% endif %}
+    </div>
+
+{% endblock %}

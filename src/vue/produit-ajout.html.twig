@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Ajouter un produit {% endblock %}
+{% block contenu %}
+
+<div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">
+<form action="index.php?page=produit-ajout" method="post" enctype="multipart/form-data">
+
+        <h1 class="text-center">Ajouter un nouveau produit</h1>
+        <label for="inputNomProduit" class="mt-2 fw-bold">Nom du produit : </label>
+        <input type="text" id="inputNomProduit" name="inputNomProduit" class="form-control" placeholder="Nom" required autofocus>
+
+        <label for="inputDescription" class="mt-2 fw-bold">Description du produit : </label>
+        <textarea id="inputDescription" maxlenght="120" rows="8" name="inputDescription" class="form-control" placeholder="Description" required autofocus></textarea>
+        <div class="row">
+        <div class="col">
+            <label for="inputPrix" class="mt-2 col-6 fw-bold">Prix du produit : </label>
+            <input type="number" id="inputPrix" name="inputPrix" class="form-control col-form-label col-6" placeholder="Prix" required autofocus>
+        </div>
+        <div class="col">
+            <label for="inputCtg" class="mt-2 col-6 fw-bold">Catégorie du produit : </label>
+                <select class="form-control" required name="inputCtg">
+                    {% for t in listeT %}
+                    <option value="{{ t.id }}">{{ t.libelle }}</option>
+                    {% endfor %}
+                </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="photo" class="mt-2 col-6 fw-bold form-label">Ajoutez votre image <span style="color:red">(ne gère pas les fichier .png)</span></label>
+            <input type="file" name="photo" id="photo" required class="form-control"/>
+        </div>
+
+        <div class="text-center d-grid gap-2"><button type="submit" class="btn btn-primary btn-lg mt-2 mb-2" type="submit" name="btProduit">Ajouter un produit</button></div>
+        
+    </form>
+    
+</div>
+</div>
+{% endblock %}

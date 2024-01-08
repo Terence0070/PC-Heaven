@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+    {% block title %} {{ parent() }} Modifier un utilisateur {% endblock %}
+        {% block contenu %}
+                {% if form.type is defined %}
+                    {% if form.type != null %}
+                        <div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">
+                            <form class="form-signin" action="index.php?page=type-modif" method="post"
+                            enctype="application/x-www-form-urlencoded">
+                                <h1 class="text-center">Modifier le libellé</h1>
+
+                                    <label for="libelle" class="mt-2 fw-bold"> Modifier le libellé :</label>
+                                    <input type="text" id="libelle" name="libelle" class="form-control"
+                                    placeholder="Modifier le libellé" value="{{form.type.libelle}}" >
+
+                                    <input type="hidden" name="id" value="{{ form.type.id}}"/>
+
+                                <div class="text-center d-grid gap-2"><button type="submit" class="btn btn-primary btn-lg mt-2 mb-2" name="btModifier">Modifier</button></div>
+                            </form>
+                        </div>
+                        {% else %}
+                            <h2 class="alert alert-danger" role="alert">{{ form.message }}</h2>
+                            <a href="index.php?page=type">Retourner sur la liste des types</a>
+                        {% endif %}
+                        {% else %}
+                        {% if form.valide == true %}
+                            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=type">Retourner sur la liste des types</a></h1>
+                        {% else %}
+                            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+                            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=type">Retourner sur la liste des types</a></h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

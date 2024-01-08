@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Panier {% endblock %}
+{% block contenu %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Panier d'achat</h1>
+
+        {% if session.panier is defined and liste|length > 0 %}
+            <form action="index.php?page=panier" method="post">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set total = 0 %}
+                        {% for u in liste %}
+                            {% set somme = session.panier[u.id] * u.prix %}
+                            {% set total = total + somme %}
+                            <tr>
+                                <td>
+                                    <a href="index.php?page=ordinateurs&id={{ u.id }}">{{ u.nomProduit }}</a>
+                                </td>
+                                <td>{{ u.prix }} euros</td>
+                                <td>
+                                    <input type="number" name="q-{{ u.id }}" min="1" max="100" value="{{ session.panier[u.id] }}" required>
+                                </td>
+                                <td>{{ somme }}</td>
+                                <td>
+                                    <a href="index.php?page=panier&remove={{ u.id }}" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i> Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="subtotal fw-bold display-6">
+                    <span class="text">Total : </span>
+                    <span class="prix">{{ total }} euros</span>
+                </div>
+                <input type="hidden" name="montant" value="{{ total }}">
+                <div class="buttons mt-4 mb-4">
+                    <button type="submit" class="btn btn-primary" name="update">Mettre à jour</button>
+                    <button type="submit" class="btn btn-success" name="placerCommade">Passer la commande</button>
+                </div>
+            </form>
+        {% else %}
+            {% if not form.valide is defined %}
+                <div class="alert alert-warning mt-4" role="alert">
+                    <h2>Votre panier est vide</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if form.valide is defined %}
+            <div class="container mt-4">
+                {% if form.valide == true %}
+                    <div class="alert alert-success" role="alert">
+                        <h2>{{ form.message }}</h2>
+                        <p>Votre commande est prise en considération avec succès.</p>
+                        <p>Merci de faire vos achats sur shop-shop ! </p>
+                        <p>Nous vous contacterons par e-mail avec les détails de votre commande.</p>
+                        {% if form.erreur is defined %}
+                            <h3 class="text-warning">{{ form.erreur }}</h3>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <h2>{{ form.message }}</h2>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+

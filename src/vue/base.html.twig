@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Required meta tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link href="../public/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<title>{% block title %} PC BUILDER - {% endblock %} </title>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top navbar-sm" id="mainNav">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href=".">
+        <h4 style="margin-top:6px; font-size:30px;" class="text-white align-self-center fw-bold">PC BUILDER</h4>
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul style="font-size:16px;" class="navbar-nav ms-auto text-center custom-nav">
+        <form class="form-inline my-2 my-lg-0" action="index.php" method="GET">
+          <input type="hidden" name="page" value="recherche">
+          <div class="input-group">
+              <input class="form-control" type="search" name="q" placeholder="Tapez votre recherche" aria-label="Tapez votre recherche">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary btn-dark text-white" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+          </div>
+        </form>
+
+
+
+        <li class="nav-item button-menu">
+          <a class="nav-link btn btn-dark rounded text-white menu_bouton" href="index.php?page=ordinateurs">Ordinateurs</a>
+        </li>
+        <li class="nav-item button-menu">
+          <a class="nav-link btn btn-dark rounded text-white menu_bouton" href="index.php?page=composants">Composants</a>
+        </li>
+        <li class="nav-item button-menu">
+          <a class="nav-link btn btn-dark rounded text-white menu_bouton disabled" href="index.php?page=configurateur">Configurateur</a>
+        </li>
+        <li class="nav-item dropdown">
+                        
+        {%if session.login is defined %}
+          <a class="nav-link btn btn-dark rounded fw-bold text-white menu_bouton dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-bold" href="index.php?page=deconnexion">Se déconnecter</a></li>
+                            {% else %}
+                            <a class="nav-link btn btn-dark rounded fw-bold text-white menu_bouton dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        S'identifier
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-bold" href="index.php?page=inscrire">Inscrire</a></li>
+                            <li><a class="dropdown-item fw-bold" href="index.php?page=connexion">Se connecter</a></li>
+                        {% endif %}
+                        </ul>
+
+                    {%if session.login is defined %}
+                        {%if session.role == 1 %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn btn-dark rounded me-2 text-uppercase fw-bold text-white menu_bouton dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
+                                </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="index.php?page=produit">Produit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="index.php?page=type">Type</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="index.php?page=utilisateur">Utilisateur</a>
+                                    </div>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                    {%if session.login is defined %}
+                            {%if session.role == 2 %}
+                            <li class="nav-item button-menu">
+                              <a class="nav-link btn btn-dark rounded text-white menu_bouton" href="index.php?page=panier">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                              </a>
+                            </li>
+                            {% endif %}
+                          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</head>
+<body>
+<div style="height:65px">
+</div>
+{% block contenu %}
+{% endblock %}
+<!-- Footer-->
+    <div class="end_page p-3" style="background-color: rgba(0, 0, 255, 0.05);">
+      <div class="container text-dark text-center">
+        <div class="row align-items-center">
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase fw-bold mb-2">Localisation</h4>
+            <p class="lead mb-0">
+              Vaucluse, Avignon
+            </p>
+          </div>
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <h4 class="text-uppercase fw-bold mb-4">Nos réseaux</h4>
+            <div class="align-items-center social-icons">
+              <div>
+                <a href="lien_vers_facebook"><i class="fa-brands fa-facebook"></i></a> <!-- Logo Facebook -->
+                <a href="lien_vers_facebook" style="margin-left: 10px;"><i class="fa-brands fa-youtube"></i></a> <!-- Logo YouTube -->
+                <a href="lien_vers_facebook" style="margin-left: 10px;"><i class="fa-brands fa-x-twitter"></i></a> <!-- Logo Twitter -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-3 mb-lg-0">
+            <h4 class="text-uppercase fw-bold mb-2">Divers</h4>
+            <div class="justify-content-center align-items-center">
+              <div class="">
+                <a href="/mentions-legales.php" target="_blank" class="lead divers_menu divers">Mentions légales</a>
+              </div>
+              <div class="">
+                <a href="/politique-de-confidentialite.php" target="_blank" class="lead divers_menu divers">Politique de confidentialité</a>
+              </div>
+              <div class="">
+                <a href="/cookies.php" target="_blank" class="lead divers_menu divers">Cookies</a>
+              </div>
+              <div class="">
+                <a href="/credits.php" target="_blank" class="lead divers_menu divers">A propos</a>
+              </div>
+              <div class="">
+                <a href="/credits.php" target="_blank" class="lead divers_menu divers">Crédits</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="py-2 bg-dark">
+      <div class="container bg-dark px-4">
+        <p class="m-0 text-center text-white"><i>Copyright &copy; PC Builder 2023.
+        Tous droits réservés. Site réalisé par <a href="https://www.linkedin.com/in/terence-renard" target="_blank">Terence Renard</a> - 
+        <a href="https://github.com/Terence0070" target="_blank"><i style="margin-left:6px;" class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/terence-renard/" target="_blank"><i style="margin-left:10px;" class="fa-brands fa-linkedin"></a></i></p>
+      </div>
+    </footer>
+  </div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/4e8a26577c.js" crossorigin="anonymous"></script>
+    <script src="../public/js/bootstrap.js"></script>
+    <script src="../public/js/bootstrap.esm.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="../public/js/bootstrap.bundle.js"></script>
+</body>
+</html>

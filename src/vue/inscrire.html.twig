@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }}S'inscrire {% endblock %}
+{% block contenu %}
+{% if form.valide is defined %}
+{% if form.valide == true %}
+<div class="container">
+<h1 class="text-success">Inscription réussie</h1>
+<h1>Voici votre identifiant : {{form.email}}</h1>
+{% if form.role == 1 %}
+<h1>Vous êtes administrateur du site</h1>
+</div>
+{% else %}
+<h1>Vous êtes un client du site </h1>
+</div>
+{% endif %}
+{% else %}
+<div class="container">
+ <h1 class="text-danger">Echec de l'inscription</h1>
+ <h1>Erreur : {{form.message}}</h1>
+ <h1><a href="index.php?page=inscrire">Retourner sur la page d'inscription</a></h1>
+ </div>
+{% endif %}
+{% else %}
+<div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">
+<form action="index.php?page=inscrire" method="post" enctype="application/x-www-form- urlencoded">
+    <h1 class="text-center">Inscrivez-vous sur SHOP-SHOP</h1>
+    <label for="inputEmail" class="mt-2 fw-bold">Email : </label>
+    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+
+    <label for="inputPassword" class="mt-2 fw-bold">Mot de passe :</label>
+    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+
+    <label for="inputPassword2" class="mt-2 fw-bold">Confirmation du mot de passe :</label>
+    <input type="password" id="inputPassword2" name="inputPassword2" class="form-control" placeholder="Confirmation du mot de passe" required>
+
+    <label for="nom" class="mt-2 fw-bold">Nom :</label>
+    <input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
+
+    <label for="prenom" class="mt-2 fw-bold">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Votre prénom" required>
+
+    <label for="role" class="mt-2 fw-bold">Votre rôle :</label>
+    <select class="form-control" name="role">
+    <option value="1">Administrateur</option>
+    <option value="2">Client</option>
+    </select>
+    <div class="text-center d-grid gap-2"><button type="submit" class="btn btn-primary btn-lg mt-2 mb-2" name="btInscrire">S'inscrire</button></div>
+<input type="checkbox" required> En m'inscrivant, j'accepte la charte du site.
+</p>
+</form>
+</div>
+{% endif %}
+{% endblock %}

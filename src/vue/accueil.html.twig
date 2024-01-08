@@ -1,0 +1,131 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Accueil {% endblock %}
+{% block contenu %}
+    <div class="text-center bg-info">
+        <h1 class="mt-0 display-1 fw-bold text-white">Welcome to PC BUILDER !</h1> 
+
+        <h3 class="pb-3 mb-0 text-white">Prêt à devenir un pro gamer ?</h3>
+    </div>
+
+<!-- Section des danses-->
+            <div id="danse" class="mt-n3">
+            <div id="Carousel_Danse" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicateurs -->
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+              
+                <!-- Contenu du carrousel -->
+                <div class="pb-3 carousel-inner">
+                <div class="carousel-item active">
+                    <div class="gradient-overlay"></div>
+                    <img src="../public/images/pc1.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Salsa">
+                    <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h2 class="display-2">PC pré-configurés</h2>
+                        <p>Des ordinateurs déjà prêts qui n'attendent que des joueurs chevronnés, pour tous les budgets !</p>
+                        <p><a class="btn btn-lg btn-info" href="index.php?page=ordinateurs">Voir les ordinateurs</a></p>
+                    </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="gradient-overlay"></div>
+                    <img src="../public/images/pc2.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Bachata">
+                    <div class="container">
+                    <div class="carousel-caption">
+                        <h2 class="display-2">Créez votre PC !</h2>
+                        <p>Créez votre ordinateur avec notre éditeur !</p>
+                        <p class="text-danger display-6 fw-bold">Pour le moment indisponible, à dans une prochaine mise à jour !</p>
+                        <p><a class="btn btn-lg btn-info disabled" href="#">Configurer votre PC</a></p>
+                    </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="gradient-overlay"></div>
+                    <img src="../public/images/pc3.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Bachata">
+                    <div class="container">
+                    <div class="carousel-caption">
+                        <h2 class="display-2">Trouvez le composant qu'il vous faut !</h2>
+                        <p>Besoin de renouveller une pièce de votre PC ? C'est ici que cela se passe !</p>
+                        <p><a class="btn btn-lg btn-info" href="index.php?page=composants">Trouver le composant</a></p>
+                    </div>
+                    </div>
+                </div>
+              
+                <!-- Contrôles du carrousel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#Carousel_Danse" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#Carousel_Danse" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Suivant</span>
+                </button>
+            </div>
+            </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Section Ordinateurs Récents -->
+            <div class="col-md-6">
+            <h2 class="mb-4 text-center fw-bold">Nos ordinateurs les plus récents</h2>
+                <div class="row">
+                    {% for produit in ordinateursRecents %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                {% if produit.photo is not empty %}
+                                <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <p class="card-text">{{ produit.description }}</p>
+                                    <p class="card-text fw-bold text-center">Prix : {{ produit.prix }}€</p>
+                                    {%if session.login is defined %}
+                                        {%if session.role == 2 %}
+                                            <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
+                                                <input type="hidden" name="id" value="{{ produit.id }}" />
+                                                <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Section Composants Récents -->
+            <div class="col-md-6">
+            <h2 class="mb-4 text-center fw-bold">Nos composants les plus récents</h2>
+                <div class="row">
+                    {% for produit in composantsRecents %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                {% if produit.photo is not empty %}
+                                <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <p class="card-text">{{ produit.description }}</p>
+                                    <p class="card-text fw-bold text-center">Prix : {{ produit.prix }}€</p>
+                                    {%if session.login is defined %}
+                                        {%if session.role == 2 %}
+                                            <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
+                                                <input type="hidden" name="id" value="{{ produit.id }}" />
+                                                <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                </div> 
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

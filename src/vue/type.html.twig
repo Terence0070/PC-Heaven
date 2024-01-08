@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Type {% endblock %}
+{% block contenu %}
+
+{% if form.etat is defined %}
+ {% if form.etat == true %}
+ <h1 class="h3 mb-3 font-weight-normal">Suppression réussie</h1>
+ {% else %}
+ <h1 class="alert alert-danger" role="alert">Problème d'insertion</h1>
+ {% endif %}
+{% endif %}
+
+<form class="form-signin" action="index.php?page=type" method="post" enctype="application/x-www-form-urlencoded">
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Libellé</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in liste %}
+                    <tr>
+                    <td>{{t.libelle}}</td>
+                    <td><button class="btn btn-primary"><a class="text-light" style="text-decoration: none;" href="index.php?page=type-modif&id={{t.id}}">Modifier</a></button></td>
+                    <td><button class="btn btn-danger"><a class="text-light" style="text-decoration: none;" href="index.php?page=type&id={{t.id}}">Supprimer</a></button></td>
+                    <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{t.id}}" /></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btSupprimer">Supprimer</button>
+        </form> 
+    </div>
+
+    <form action="index.php?page=type" method="post" enctype="application/x-www-form- urlencoded">
+        <h1 class="text-center">Ajouter un nouveau libellé</h1>
+        <label for="inputLibelle" class="mt-2 fw-bold">Libellé : </label>
+        <input type="text" id="inputLibelle" name="inputLibelle" class="form-control" placeholder="Libellé" required autofocus>
+        <div class="text-center d-grid gap-2"><button type="submit" class="btn btn-primary btn-lg mt-2 mb-2" type="submit" name="btLibelle">Ajouter le libellé</button></div>
+    </form>
+
+</div>
+{% endblock %}
