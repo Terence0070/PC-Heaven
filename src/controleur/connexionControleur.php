@@ -26,6 +26,7 @@ function connexionControleur($twig, $db){
             $form['valide'] = false;
         }
     }
-    echo $twig->render('connexion.html.twig', array('form' => $form));
+    echo $twig->render('connexion.html.twig', array(
+        'form' => $form));
 }
 ?>

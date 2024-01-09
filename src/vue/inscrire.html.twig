@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block title %} {{ parent() }}S'inscrire {% endblock %}
 {% block contenu %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 {% if form.valide is defined %}
 {% if form.valide == true %}
 <div class="container">
@@ -28,10 +29,20 @@
     <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
 
     <label for="inputPassword" class="mt-2 fw-bold">Mot de passe :</label>
-    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+    <div class="input-group">
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+        <div class="input-group-append">
+            <button type="button" class="btn btn-primary text-white" id="afficherMdp">Afficher</button>
+        </div>
+    </div>
 
     <label for="inputPassword2" class="mt-2 fw-bold">Confirmation du mot de passe :</label>
-    <input type="password" id="inputPassword2" name="inputPassword2" class="form-control" placeholder="Confirmation du mot de passe" required>
+    <div class="input-group">
+        <input type="password" id="inputPassword2" name="inputPassword2" class="form-control" placeholder="Confirmation du mot de passe" required>
+        <div class="input-group-append">
+            <button type="button" class="btn btn-primary text-white" id="afficherMdp2">Afficher</button>
+        </div>
+    </div>
 
     <label for="nom" class="mt-2 fw-bold">Nom :</label>
     <input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom" required>
@@ -49,5 +60,28 @@
 </p>
 </form>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Fonction pour basculer l'affichage du mot de passe
+    function togglePassword(inputField, buttonId) {
+        var passwordField = $('#' + inputField);
+        var toggleButton = $('#' + buttonId);
+
+        toggleButton.on('click', function() {
+            var fieldType = passwordField.attr('type');
+            if (fieldType === 'password') {
+                passwordField.attr('type', 'text');
+            } else {
+                passwordField.attr('type', 'password');
+            }
+        });
+    }
+
+    // Appeler la fonction pour chaque paire de champ de mot de passe et bouton
+    togglePassword('inputPassword', 'afficherMdp');
+    togglePassword('inputPassword2', 'afficherMdp2');
+});
+</script>
 {% endif %}
 {% endblock %}

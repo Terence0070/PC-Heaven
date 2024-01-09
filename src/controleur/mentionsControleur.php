@@ -1,5 +1,5 @@
 <?php
-function mentionsControleur($twig){
+function mentionsControleur($twig, $db){
     echo $twig->render('mentions.html.twig', array());
     }
 ?>

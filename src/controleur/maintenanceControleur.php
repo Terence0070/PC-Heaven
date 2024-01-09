@@ -1,5 +1,5 @@
 <?php
-function maintenanceControleur($twig){
+function maintenanceControleur($twig, $db){
     echo $twig->render('maintenance.html.twig', array());
 }
 ?>

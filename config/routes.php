@@ -7,20 +7,21 @@ $lesPages['inscrire'] = "inscrireControleur;0";
 $lesPages['connexion'] = "connexionControleur;0";
 $lesPages['deconnexion'] = "deconnexionControleur;0";
 $lesPages['maintenance'] = "maintenanceControleur;0";
-$lesPages['recherche'] = "rechercheControleur;0";
 
 // Contrôleur lié au panier
 $lesPages['panier'] = "panierControleur;2";
 
 // Contrôleurs liés aux différentes pages principales (le choix des composants, du PC, le configurateur, etc.)
+$lesPages['recherche'] = "rechercheControleur;0";
 $lesPages['ordinateurs'] = "ordinateursControleur;0";
 $lesPages['configurateur'] = "configurateurControleur;0";
 $lesPages['composants'] = "composantsControleur;0";
 
 // Contrôleurs liés aux pages tertiaires (tout ce qui est lié à la paperasse et le légal)
-$lesPages['mentions'] = "mentionsControleur;0";
+$lesPages['mentions_legales'] = "mentionsControleur;0";
+$lesPages['politique_confidentialite'] = "politiqueControleur;0";
 $lesPages['contact'] = "contactControleur;0";
-$lesPages['apropos'] = "aproposControleur;0";
+$lesPages['a_propos'] = "aproposControleur;0";
 
 // Contrôleurs liés aux types (carte graphique, processeur, etc.) (Accessible uniquement aux admins)
 $lesPages['type'] = "typeControleur;1";

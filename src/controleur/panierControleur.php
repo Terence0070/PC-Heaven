@@ -78,6 +78,8 @@ function panierControleur($twig, $db)
         }
     }
 
-    echo $twig->render('panier.html.twig', array('form' => $form, 'liste' => $liste));
+    echo $twig->render('panier.html.twig', array(
+        'form' => $form,
+        'liste' => $liste));
 }
 ?>

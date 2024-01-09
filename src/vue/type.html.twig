@@ -26,8 +26,8 @@
                 {% for t in liste %}
                     <tr>
                     <td>{{t.libelle}}</td>
-                    <td><button class="btn btn-primary"><a class="text-light" style="text-decoration: none;" href="index.php?page=type-modif&id={{t.id}}">Modifier</a></button></td>
-                    <td><button class="btn btn-danger"><a class="text-light" style="text-decoration: none;" href="index.php?page=type&id={{t.id}}">Supprimer</a></button></td>
+                    <td><a class="btn btn-primary text-light" style="text-decoration: none;" href="index.php?page=type-modif&id={{t.id}}">Modifier</a></td>
+                    <td><a class="btn btn-danger text-light" style="text-decoration: none;" href="index.php?page=type&id={{t.id}}">Supprimer</a></td>
                     <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{t.id}}" /></td>
                     </tr>
                 {% endfor %}

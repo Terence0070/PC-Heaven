@@ -32,8 +32,8 @@
                     <td>{{u.nom}}</td>
                     <td>{{u.prenom}}</td>
                     <td>{{u.libellerole}}</td>
-                    <td><button class="btn btn-primary"><a class="text-light" style="text-decoration: none;" href="index.php?page=utilisateur-modif&id={{u.id}}">Modifier</a></button></td>
-                    <td><button class="btn btn-danger"><a class="text-light" style="text-decoration: none;" href="index.php?page=utilisateur&id={{u.id}}">Supprimer</a></button></td>
+                    <td><a class="text-light btn btn-primary" style="text-decoration: none;" href="index.php?page=utilisateur-modif&id={{u.id}}">Modifier</a></td>
+                    <td><a class="text-light btn btn-danger" style="text-decoration: none;" href="index.php?page=utilisateur&id={{u.id}}">Supprimer</a></td>
                     <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{u.id}}" /></td>
                     </tr>
                 {% endfor %}

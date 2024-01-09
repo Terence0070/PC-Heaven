@@ -85,7 +85,9 @@ function produitAjoutControleur($twig, $db) {
             $form['message'] = 'Problème d\'insertion dans la table produit ';
         }
     }
-    echo $twig->render('produit-ajout.html.twig', array('form' => $form, "listeT" => $listeT));
+    echo $twig->render('produit-ajout.html.twig', array(
+        'form' => $form, 
+        "listeT" => $listeT));
 }
 
 function produitModifControleur($twig, $db) {
@@ -125,6 +127,8 @@ function produitModifControleur($twig, $db) {
             }
         }
     }
-    echo $twig->render('produit-modif.html.twig', array('form' => $form, "listeT"=>$listeT));
+    echo $twig->render('produit-modif.html.twig', array(
+        'form' => $form, 
+        "listeT"=>$listeT));
 }
 ?>

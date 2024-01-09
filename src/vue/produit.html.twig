@@ -35,8 +35,8 @@
                     <td>{{p.description}}</td>
                     <td>{{p.prix}}€</td>
                     <td>{{p.idType}}</td>
-                    <td><button class="btn btn-primary"><a class="text-light" style="text-decoration: none;" href="index.php?page=produit-modif&id={{p.id}}">Modifier</a></button></td>
-                    <td><button class="btn btn-danger"><a class="text-light" style="text-decoration: none;" href="index.php?page=produit&id={{p.id}}">Supprimer</a></button></td>
+                    <td><a class="text-light btn btn-primary" style="text-decoration: none;" href="index.php?page=produit-modif&id={{p.id}}">Modifier</a></td>
+                    <td><a class="text-light btn btn-danger" style="text-decoration: none;" href="index.php?page=produit&id={{p.id}}">Supprimer</a></td>
                     <td><input type="checkbox" name="cocher[]" id="cocher[]" value="{{p.id}}"/></td>
                     </tr>
                 {% endfor %}

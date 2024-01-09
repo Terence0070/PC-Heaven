@@ -29,7 +29,9 @@
             $form['etat'] = $_GET['etat'];
             }
             $liste = $type->select();
-            echo $twig->render('type.html.twig', array('form'=>$form,'liste'=>$liste));
+            echo $twig->render('type.html.twig', array(
+                'form'=>$form,
+                'liste'=>$liste));
 
         if (isset($_POST['btLibelle'])){
             $form['valide'] = true;
@@ -74,6 +76,7 @@
             }
         }
     
-        echo $twig->render('type-modif.html.twig', array('form' => $form));
+        echo $twig->render('type-modif.html.twig', array(
+            'form' => $form));
     }
 ?>

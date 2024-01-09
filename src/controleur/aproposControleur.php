@@ -1,5 +1,5 @@
 <?php
-function aproposControleur($twig){
-        echo $twig->render('apropos.html.twig', array());
-    }
+function aproposControleur($twig, $db){
+    echo $twig->render('apropos.html.twig', array());
+}
 ?>

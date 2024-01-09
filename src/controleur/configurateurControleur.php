@@ -1,5 +1,5 @@
 <?php
-function configurateurControleur($twig){
-        echo $twig->render('configurateur.html.twig', array());
-    }
+function configurateurControleur($twig, $db){
+    echo $twig->render('configurateur.html.twig', array());
+}
 ?>

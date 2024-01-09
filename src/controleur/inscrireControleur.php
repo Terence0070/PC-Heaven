@@ -49,6 +49,7 @@ function inscrireControleur($twig, $db){
         }
     }
 
-    echo $twig->render('inscrire.html.twig', array('form' => $form));
+    echo $twig->render('inscrire.html.twig', array(
+        'form' => $form));
 }
 ?>

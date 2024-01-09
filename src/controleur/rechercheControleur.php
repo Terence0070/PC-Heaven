@@ -9,6 +9,7 @@ function rechercheControleur($twig, $db) {
         $resultats = $produit->recherche($recherche);
     }
 
-    echo $twig->render('recherche.html.twig', array('resultats' => $resultats));
+    echo $twig->render('recherche.html.twig', array(
+        'resultats' => $resultats));
 }
 ?>
