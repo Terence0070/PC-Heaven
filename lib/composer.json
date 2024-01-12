@@ -1,6 +1,5 @@
 {
     "require": {
-        "twig/twig":"3.*",
-        "spipu/html2pdf": "^4.6"
+        "twig/twig":"3.*"
     }
 }
