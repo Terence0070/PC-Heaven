@@ -1,4 +1,5 @@
 <?php
+use Spipu\Html2Pdf\Html2Pdf;
 class Produit {
    private $db;
    private $insert;
@@ -106,6 +107,20 @@ class Produit {
          print_r($this->recherche->errorInfo());
       }
       return $this->recherche->fetchAll();
+   }
+
+   function actionListeProduitPdf($twig, $db){
+      $produit = new Produit($db);
+      $liste = $unProduit = $produit->select();
+      $html = $twig->render('produit-liste-pdf.html.twig', array('liste'=>$liste)); // Nous envoyons notre liste de produit dans le moteur de template TWIG.
+      try {
+         $html2pdf = new Html2Pdf('P', 'A4', 'fr'); // Création d'une page au format A4 de langue française orienté en mode portrait.
+         $html2pdf->writeHTML($html); // Nous écrivons le résultat de twig dans la variable html2pdf
+         ob_end_clean(); // Cette commande s'assure de ne pas envoyer de données avant le fichier PDF
+         $html2pdf->output('listedesproduits.pdf'); // Nous écrivons dans un fichier PDF nommé listedesproduits
+      } catch (Html2PdfException $e) {
+         echo 'erreur '.$e;
+      }
    }
 }
     

@@ -44,16 +44,16 @@
     <div class="container-fluid">
         {% if ordinateurs or laptops %}
             {% if ordinateurs %}
-                <h2>Ordinateurs</h2>
+                <h2 class="fw-bold">Ordinateurs</h2>
                 <div class="row">
                     {% for produit in ordinateurs %}
                         <div class="col-md-4 mb-4">
                             <div class="card d-flex flex-column h-100">
                                 {% if produit.photo is not empty %}
-                                    <img src="images/{{ produit.photo }}" alt="Produit Image" class="mx-auto" style="max-width: 360px; max-height: 360px;">
+                                    <img src="images/{{ produit.photo }}" alt="Produit Image" class="mx-auto" style="max-width: 240px; max-height: 240px;">
                                 {% endif %}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                     <p class="card-text">{{ produit.description }}</p>
                                     <p class="card-text fw-bold text-center">Prix: {{ produit.prix }}€</p>
                                     {%if session.login is defined %}
@@ -63,7 +63,16 @@
                                     {% endif %}
                                     <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
                                         <input type="hidden" name="id" value="{{ produit.id }}" />
-                                        <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        <div class="text-center">
+                                            <button class="btn btn-primary mt-auto text-center"
+                                        {% if session.login is not defined %}
+                                        disabled
+                                        {% endif %}         
+                                        type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        {% if session.login is not defined %}
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        {% endif %}   
+                                        </div> 
                                     </form>
                                 </div>
                             </div>
@@ -71,18 +80,18 @@
                     {% endfor %}
                 </div>
             {% endif %}
-
+            <hr>
             {% if laptops %}
-                <h2>Laptops</h2>
+                <h2 class="fw-bold">Laptops</h2>
                 <div class="row">
                     {% for produit in laptops %}
                         <div class="col-md-4 mb-4">
                             <div class="card d-flex flex-column h-100">
                                 {% if produit.photo is not empty %}
-                                    <img src="images/{{ produit.photo }}" alt="Produit Image" class="mx-auto" style="max-width: 360px; max-height: 360px;">
+                                    <img src="images/{{ produit.photo }}" alt="Produit Image" class="mx-auto" style="max-width: 240px; max-height: 240px;">
                                 {% endif %}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                     <p class="card-text">{{ produit.description }}</p>
                                     <p class="card-text fw-bold text-center">Prix: {{ produit.prix }} €</p>
                                     {%if session.login is defined %}
@@ -92,7 +101,16 @@
                                     {% endif %}
                                     <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
                                         <input type="hidden" name="id" value="{{ produit.id }}" />
-                                        <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        <div class="text-center">
+                                            <button class="btn btn-primary mt-auto text-center"
+                                        {% if session.login is not defined %}
+                                        disabled
+                                        {% endif %}         
+                                        type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        {% if session.login is not defined %}
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        {% endif %}   
+                                        </div> 
                                     </form>
                                 </div>
                             </div>

@@ -69,27 +69,32 @@
     <div class="container mt-5">
         <div class="row">
             <!-- Section Ordinateurs Récents -->
-            <div class="col-md-6">
+            <div class="col-sm-12 col-lg-6">
             <h2 class="mb-4 text-center fw-bold">Nos ordinateurs les plus récents</h2>
                 <div class="row">
                     {% for produit in ordinateursRecents %}
-                        <div class="col-md-6 mb-4">
+                        <div class="col-sm-12 col-lg-6 mb-4">
                             <div class="card h-100">
                                 {% if produit.photo is not empty %}
                                 <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
                                 {% endif %}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                     <p class="card-text">{{ produit.description }}</p>
                                     <p class="card-text fw-bold text-center">Prix : {{ produit.prix }}€</p>
-                                    {%if session.login is defined %}
-                                        {%if session.role == 2 %}
-                                            <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
-                                                <input type="hidden" name="id" value="{{ produit.id }}" />
-                                                <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
-                                            </form>
-                                        {% endif %}
-                                    {% endif %}
+                                    <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="id" value="{{ produit.id }}" />
+                                        <div class="text-center">
+                                            <button class="btn btn-primary mt-auto text-center"
+                                        {% if session.login is not defined %}
+                                        disabled
+                                        {% endif %}         
+                                        type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        {% if session.login is not defined %}
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        {% endif %}   
+                                        </div> 
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -98,27 +103,32 @@
             </div>
 
             <!-- Section Composants Récents -->
-            <div class="col-md-6">
+            <div class="col-sm-12 col-lg-6">
             <h2 class="mb-4 text-center fw-bold">Nos composants les plus récents</h2>
                 <div class="row">
                     {% for produit in composantsRecents %}
-                        <div class="col-md-6 mb-4">
+                        <div class="col-sm-12 col-lg-6 mb-4">
                             <div class="card h-100">
                                 {% if produit.photo is not empty %}
                                 <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
                                 {% endif %}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                    <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                     <p class="card-text">{{ produit.description }}</p>
                                     <p class="card-text fw-bold text-center">Prix : {{ produit.prix }}€</p>
-                                    {%if session.login is defined %}
-                                        {%if session.role == 2 %}
-                                            <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
-                                                <input type="hidden" name="id" value="{{ produit.id }}" />
-                                                <button class="btn btn-primary mt-auto" type="submit" name="btAjoutP">Ajouter au panier</button>
-                                            </form>
-                                        {% endif %}
-                                    {% endif %}
+                                    <form action="index.php?page=panier" method="post" enctype="application/x-www-form-urlencoded">
+                                        <input type="hidden" name="id" value="{{ produit.id }}" />
+                                        <div class="text-center">
+                                            <button class="btn btn-primary mt-auto text-center"
+                                        {% if session.login is not defined %}
+                                        disabled
+                                        {% endif %}         
+                                        type="submit" name="btAjoutP">Ajouter au panier</button>
+                                        {% if session.login is not defined %}
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        {% endif %}   
+                                        </div> 
+                                    </form>
                                 </div> 
                             </div>
                         </div>

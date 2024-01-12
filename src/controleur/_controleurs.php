@@ -28,6 +28,7 @@
 
 // Contrôleur lié aux produits (Accessible uniquement aux admins)
     require_once 'produitControleur.php';
+    require_once 'produitListePdfControleur.php';
 
 // Contrôleur lié aux utilisateurs (Accessible uniquement aux admins)
     require_once 'utilisateurControleur.php';
