@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
     {% block title %} {{ parent() }} Modifier un produit {% endblock %}
-        {% block contenu %}
+        {% block contenu %} <!-- Permet de modifier tous les champs du produit déjà enregistré -->
                 {% if form.produit is defined %}
                     {% if form.produit != null %}
                         <div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">

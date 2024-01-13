@@ -16,7 +16,7 @@ class Type {
         $this->delete = $db->prepare("DELETE FROM type WHERE id=:id");
     }
 
-    public function insert($libelle){
+    public function insert($libelle){  // Permet d'insérer un nouveau "type"
         $r = true;
         $this->insert->execute(array(':libelle'=>$libelle));
         if ($this->insert->errorCode()!=0){ print_r($this->insert->errorInfo());
@@ -25,7 +25,7 @@ class Type {
         return $r;
         }    
 
-    public function select(){
+    public function select(){  // Permet d'afficher tous les types
         $this->select->execute();
         if ($this->select->errorCode()!=0){
         print_r($this->select->errorInfo());
@@ -33,7 +33,7 @@ class Type {
         return $this->select->fetchAll();
         }
 
-    public function selectById($id){
+    public function selectById($id){  // Permet d'afficher un type selon son id
         $this->selectById->execute(array(':id'=>$id)); 
         if ($this->selectById->errorCode()!=0){
             print_r($this->selectById->errorInfo());
@@ -41,7 +41,7 @@ class Type {
         return $this->selectById->fetch();
         }
 
-    public function update($id, $libelle){
+    public function update($id, $libelle){  // Permet de mettre un jour un type (lui changer de nom)
         $r = true;
         $this->update->execute(array(':id'=>$id, ':libelle'=>$libelle));
         if ($this->update->errorCode()!=0){ print_r($this->update->errorInfo());
@@ -50,7 +50,7 @@ class Type {
         return $r;
         }
 
-    public function delete($id){
+    public function delete($id){  // Permet de supprimer un type
             $r = true;
             $this->delete->execute(array(':id'=>$id));
             if ($this->delete->errorCode()!=0){

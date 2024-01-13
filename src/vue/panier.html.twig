@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">Panier d'achat</h1>
 
-        {% if session.panier is defined and liste|length > 0 %}
+        {% if session.panier is defined and liste|length > 0 %} <!-- Si le panier est défini et n'est pas vide -->
             <form action="index.php?page=panier" method="post">
                 <table class="table table-striped">
                     <thead>
@@ -17,8 +17,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% set total = 0 %}
-                        {% for u in liste %}
+                        {% set total = 0 %} <!-- Le prix total est défini au départ à 0 -->
+                        {% for u in liste %} <!-- On affiche tous les produits dans le panier ligne par ligne (<tr>) -->
                             {% set somme = session.panier[u.id] * u.prix %}
                             {% set total = total + somme %}
                             <tr>
@@ -45,19 +45,19 @@
                 </div>
                 <input type="hidden" name="montant" value="{{ total }}">
                 <div class="buttons mt-4 mb-4">
-                    <button type="submit" class="btn btn-primary" name="update">Mettre à jour</button>
-                    <button type="submit" class="btn btn-success" name="placerCommade">Passer la commande</button>
+                    <button type="submit" class="btn btn-primary" name="update">Mettre à jour</button> <!-- Si des nombres sont modifiés dans les champs, on réactualise le prix -->
+                    <button type="submit" class="btn btn-success" name="placerCommade">Passer la commande</button> <!-- On accepte la commande -->
                 </div>
             </form>
         {% else %}
-            {% if not form.valide is defined %}
+            {% if not form.valide is defined %} <!-- Si le panier est vide -->
                 <div class="alert alert-warning mt-4" role="alert">
                     <h2>Votre panier est vide</h2>
                 </div>
             {% endif %}
         {% endif %}
 
-        {% if form.valide is defined %}
+        {% if form.valide is defined %} <!-- Quand le panier est validé et qu'il n'y a pas d'erreur -->
             <div class="container mt-4">
                 {% if form.valide == true %}
                     <div class="alert alert-success" role="alert">

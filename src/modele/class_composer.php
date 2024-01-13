@@ -8,7 +8,7 @@ class Composer {
         $this->insert = $db->prepare("INSERT INTO composer(idCommande, idProduit, quantite) VALUES (:idCommande, :idProduit, :quantite)");
     }
 
-    public function insert($idCommande, $idProduit, $quantite){
+    public function insert($idCommande, $idProduit, $quantite){ // Permet de composer son panier
         $r = true;
     
         $this->insert->execute(array(':idCommande'=>$idCommande, ':idProduit'=>$idProduit, ':quantite'=>$quantite));

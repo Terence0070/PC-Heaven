@@ -55,6 +55,7 @@
     <div class="container-fluid">
     {% if cpu or gpu or ram or hdd %}
     {% if cpu %}
+        <!-- Section Processeurs -->
         <h2 class="fw-bold">Processeurs (CPU)</h2>
         <div class="row">
             {% for produit in cpu %}
@@ -81,7 +82,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>
@@ -94,6 +95,7 @@
     <hr>
     {% if gpu %}
         <h2 class="fw-bold">Cartes graphiques (GPU)</h2>
+        <!-- Section Cartes Graphiques -->
         <div class="row">
             {% for produit in gpu %}
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -105,7 +107,7 @@
                             <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                 <p class="card-text">{{ produit.description }}</p>
                                 <p class="card-text fw-bold text-center">Prix: {{ produit.prix }}€</p>
-                                    {%if session.login is defined %}
+                                    {%if session.login is defined %} <!-- Permet de modifier le produit directement (s'affiche et est utilisable uniquement si on est administrateur) -->
                                         {%if session.role == 1 %}
                                         <a href="index.php?page=produit-modif&id={{ produit.id }}" class="btn btn-primary mt-auto mb-2">Détails (accessible uniquement aux adminstrateurs).</a>
                                         {% endif %}
@@ -119,7 +121,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>
@@ -132,6 +134,7 @@
     <hr>
     {% if ram %}
         <h2 class="fw-bold">Mémoire vive (RAM)</h2>
+        <!-- Section RAM -->
         <div class="row">
             {% for produit in ram %}
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -143,7 +146,7 @@
                             <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                                 <p class="card-text">{{ produit.description }}</p>
                                 <p class="card-text fw-bold text-center">Prix: {{ produit.prix }}€</p>
-                                    {%if session.login is defined %}
+                                    {%if session.login is defined %} <!-- Permet de modifier le produit directement (s'affiche et est utilisable uniquement si on est administrateur) -->
                                         {%if session.role == 1 %}
                                         <a href="index.php?page=produit-modif&id={{ produit.id }}" class="btn btn-primary mt-auto mb-2">Détails (accessible uniquement aux adminstrateurs).</a>
                                         {% endif %}
@@ -157,7 +160,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>
@@ -170,6 +173,7 @@
     <hr>
     {% if hdd %}
         <h2 class="fw-bold">Disques durs (HDD)</h2>
+        <!-- Section HDD -->
         <div class="row">
             {% for produit in hdd %}
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -195,7 +199,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>
@@ -208,6 +212,7 @@
 
     {% else %}
         {% if q or cpu_checked or gpu_checked or ram_checked or hdd_checked %}
+        <!-- Si après les recherches rentrées et les filtres utilisées, cela ne retourne strictement rien, alors on affiche aucun résultat et un message pour le dire -->
             <p style="height:1800px;" class="lead text-center text-danger fw-bold">Aucun résultat trouvé. Recherchez autre chose !</p>
         {% endif %}
     {% endif %}

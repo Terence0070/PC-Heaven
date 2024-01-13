@@ -1,5 +1,5 @@
 <?php
-function composantsControleur($twig, $db) {
+function composantsControleur($twig, $db){
     $recherche = new Recherche($db);
     $resultatsCPU = array();
     $resultatsGPU = array();

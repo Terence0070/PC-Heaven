@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
     {% block title %} {{ parent() }} Modifier un utilisateur {% endblock %}
-        {% block contenu %}
+        {% block contenu %} <!-- Permet de modifier tous les champs de l'utilisateur déjà enregistré -->
                 {% if form.utilisateur is defined %}
                     {% if form.utilisateur != null %}
                         <div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">
@@ -27,9 +27,9 @@
                                     <select class="form-control" name="idRole">
                                     {% for r in form.roles %}
                                     {% if r.id==form.utilisateur.idRole %}
-                                    <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+                                        <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
                                     {% else %}
-                                    <option value="{{ r.id }}">{{ r.libelle }}</option>
+                                        <option value="{{ r.id }}">{{ r.libelle }}</option>
                                     {% endif %}
                                     {% endfor %}
                                     </select>

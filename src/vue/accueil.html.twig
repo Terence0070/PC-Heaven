@@ -2,26 +2,26 @@
 {% block title %} {{ parent() }} Accueil {% endblock %}
 {% block contenu %}
     <div class="text-center bg-info">
-        <h1 class="mt-0 display-1 fw-bold text-white">Welcome to PC BUILDER !</h1> 
+        <h1 class="mt-0 display-1 fw-bold text-white">Welcome to PC HEAVEN!</h1> 
 
-        <h3 class="pb-3 mb-0 text-white">Prêt à devenir un pro gamer ?</h3>
+        <h3 class="pb-3 mb-0 text-white">Prêt à visiter le paradis du PC ?</h3>
     </div>
 
-<!-- Section des danses-->
-            <div id="danse" class="mt-n3">
-            <div id="Carousel_Danse" class="carousel slide" data-bs-ride="carousel">
+<!-- Carousel défilant des images -->
+            <div id="PC" class="mt-n3">
+            <div id="Carousel_PC" class="carousel slide" data-bs-ride="carousel">
                 <!-- Indicateurs -->
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#Carousel_Danse" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#Carousel_PC" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#Carousel_PC" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#Carousel_PC" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
               
                 <!-- Contenu du carrousel -->
                 <div class="pb-3 carousel-inner">
                 <div class="carousel-item active">
                     <div class="gradient-overlay"></div>
-                    <img src="../public/images/pc1.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Salsa">
+                    <img src="../public/images/pc1.jpg" class="d-block img-fluid mx-auto carousel-image" alt="PC1">
                     <div class="container">
                     <div class="carousel-caption text-start">
                         <h2 class="display-2">PC pré-configurés</h2>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="gradient-overlay"></div>
-                    <img src="../public/images/pc2.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Bachata">
+                    <img src="../public/images/pc2.jpg" class="d-block img-fluid mx-auto carousel-image" alt="PC2">
                     <div class="container">
                     <div class="carousel-caption">
                         <h2 class="display-2">Créez votre PC !</h2>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="gradient-overlay"></div>
-                    <img src="../public/images/pc3.jpg" class="d-block img-fluid mx-auto carousel-image" alt="Bachata">
+                    <img src="../public/images/pc3.jpg" class="d-block img-fluid mx-auto carousel-image" alt="PC3">
                     <div class="container">
                     <div class="carousel-caption">
                         <h2 class="display-2">Trouvez le composant qu'il vous faut !</h2>
@@ -55,11 +55,11 @@
                 </div>
               
                 <!-- Contrôles du carrousel -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#Carousel_Danse" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#Carousel_PC" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Précédent</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#Carousel_Danse" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#Carousel_PC" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Suivant</span>
                 </button>
@@ -72,10 +72,10 @@
             <div class="col-sm-12 col-lg-6">
             <h2 class="mb-4 text-center fw-bold">Nos ordinateurs les plus récents</h2>
                 <div class="row">
-                    {% for produit in ordinateursRecents %}
+                    {% for produit in ordinateursRecents %} <!-- On affiche tous les ordinateurs récemment ajoutés (les six derniers) -->
                         <div class="col-sm-12 col-lg-6 mb-4">
                             <div class="card h-100">
-                                {% if produit.photo is not empty %}
+                                {% if produit.photo is not empty %} <!-- Si le PC a une photo, on l'affiche, dans le cas contraire, on ne l'affiche pas -->
                                 <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
                                 {% endif %}
                                 <div class="card-body">
@@ -91,7 +91,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>
@@ -106,10 +106,10 @@
             <div class="col-sm-12 col-lg-6">
             <h2 class="mb-4 text-center fw-bold">Nos composants les plus récents</h2>
                 <div class="row">
-                    {% for produit in composantsRecents %}
+                    {% for produit in composantsRecents %} <!-- On affiche tous les composants récemment ajoutés (les six derniers) -->
                         <div class="col-sm-12 col-lg-6 mb-4">
                             <div class="card h-100">
-                                {% if produit.photo is not empty %}
+                                {% if produit.photo is not empty %} <!-- Si le composant a une photo, on l'affiche, dans le cas contraire, on ne l'affiche pas -->
                                 <img src="images/{{ produit.photo }}" style="max-width: 360px; max-height: 360px;" class="card-img-top mx-auto" alt="Image du produit">
                                 {% endif %}
                                 <div class="card-body">
@@ -125,7 +125,7 @@
                                         {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                         {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>  <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                         {% endif %}   
                                         </div> 
                                     </form>

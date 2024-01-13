@@ -11,7 +11,7 @@ class Accueil {
        ");
     }
 
-    public function OrdinateurRecent() {
+    public function OrdinateurRecent() { // Affiche tous les ordinateurs récents dans la page d'accueil (limité à 6).
         $this->OrdinateurRecent->execute();
         if ($this->OrdinateurRecent->errorCode()!=0){
             print_r($this->OrdinateurRecent->errorInfo());
@@ -19,7 +19,7 @@ class Accueil {
         return $this->OrdinateurRecent->fetchAll();
     }
 
-    public function ComposantsRecent() {
+    public function ComposantsRecent() { // Affiche tous les composants récents dans la page d'accueil (limité à 6).
         $this->ComposantsRecent->execute();
         if ($this->ComposantsRecent->errorCode()!=0){
             print_r($this->ComposantsRecent->errorInfo());

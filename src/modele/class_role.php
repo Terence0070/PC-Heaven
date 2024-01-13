@@ -6,7 +6,7 @@ class Role {
  $this->select = $db->prepare("SELECT id, libelle FROM role");
  }
 
- public function select(){
+ public function select(){ // Permet de gérer tout ce qui est relatif aux rôles
     $this->select->execute();
     if ($this->select->errorCode()!=0){
     print_r($this->select->errorInfo());

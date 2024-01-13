@@ -29,11 +29,10 @@ class Utilisateur {
       $this->delete = $db->prepare("DELETE from utilisateur where id=:id");
     }
 
-   public function insert($email, $mdp, $role, $nom, $prenom) {
+   public function insert($email, $mdp, $role, $nom, $prenom) {  // Permet d'insérer un nouvel utilisateur dans la base de données
       $r = true;
-      // Vérifier si l'utilisateur existe déjà
-      if ($this->existe($email)) {
-         return false; // L'utilisateur existe déjà, retourner false
+      if ($this->existe($email)) { // Si l'utilisateur existe déjà, on le rajoute pas
+         return false;
       }
 
       $this->insert->execute(array(
@@ -52,7 +51,7 @@ class Utilisateur {
       return $r;
     }
 
-   public function existe($email) {
+   public function existe($email) {  // Permet de procéder à la vérification d'un email déjà présent dans la base de données
       $this->existe->execute(array(':email' => $email));
       if ($this->existe->errorCode() != 0) {
          print_r($this->existe->errorInfo());
@@ -61,7 +60,7 @@ class Utilisateur {
       return $result['count'] > 0;
    }
 
-   public function connect($email){
+   public function connect($email){ // Permet de se connecter au site PC HEAVEN
       $unUtilisateur = $this->connect->execute(array(':email'=>$email));
       if ($this->connect->errorCode()!=0){
          print_r($this->connect->errorInfo());
@@ -69,7 +68,7 @@ class Utilisateur {
       return $this->connect->fetch();
    }
 
-   public function select(){
+   public function select(){ // Permet de sélectionner et afficher les utilisateurs
       $this->select->execute();
        if ($this->select->errorCode()!=0){
          print_r($this->select->errorInfo());
@@ -77,7 +76,7 @@ class Utilisateur {
     return $this->select->fetchAll();
    }
 
-   public function selectByEmail($email) {
+   public function selectByEmail($email) { // Permet de sélectionner et afficher les utilisateurs selon leur email
       $this->selectByEmail->execute(array(':email' => $email));
 
       if ($this->selectByEmail->errorCode() != 0) {
@@ -88,7 +87,7 @@ class Utilisateur {
    }
 
 
-   public function selectLimit($inf, $limite){
+   public function selectLimit($inf, $limite){ // Permet de sélectionner et afficher les utilisateurs avec une certaine limite (pratique pour la pagination)
       $this->selectLimit->bindParam(':inf', $inf, PDO::PARAM_INT);
       $this->selectLimit->bindParam(':limite', $limite, PDO::PARAM_INT);
 
@@ -99,7 +98,7 @@ class Utilisateur {
       return $this->selectLimit->fetchAll();
    }
 
-   public function selectCount(){
+   public function selectCount(){  // Permet de compter le nombre d'utilisateurs
       $this->selectCount->execute();
       if ($this->selectCount->errorCode()!=0){
          print_r($this->selectCount->errorInfo());
@@ -107,7 +106,7 @@ class Utilisateur {
       return $this->selectCount->fetch();
    }
 
-   public function selectById($id){
+   public function selectById($id){  // Permet d'afficher l'utilisateur selon son id
       $this->selectById->execute(array(':id'=>$id)); 
       if ($this->selectById->errorCode()!=0){
          print_r($this->selectById->errorInfo());
@@ -115,7 +114,7 @@ class Utilisateur {
       return $this->selectById->fetch();
    }
 
-   public function update($email, $id, $idRole, $nom, $prenom){
+   public function update($email, $id, $idRole, $nom, $prenom){  // Permet de mettre à jour les informations d'un utilisateur
       $r = true;
       $this->update->execute(array(':email'=>$email, ':id'=>$id, ':idRole'=>$idRole, ':nom'=>$nom, ':prenom'=>$prenom));
       if ($this->update->errorCode()!=0){ print_r($this->update->errorInfo());
@@ -124,7 +123,7 @@ class Utilisateur {
       return $r;
    }
 
-   public function updateMdp($mdp, $id) {
+   public function updateMdp($mdp, $id) {  // Permet de mettre à jour le mot de passe de l'utilisateur
       $r = true;
       $this->updateMdp->execute(array(':mdp' => $mdp, ':id' => $id));
       if ($this->updateMdp->errorCode() != 0) {
@@ -134,7 +133,7 @@ class Utilisateur {
       return $r;
   }
 
-  public function delete($id){
+  public function delete($id){  // Permet de supprimer un utilisateur de la base de données (donc du site)
       $r = true;
       $this->delete->execute(array(':id'=>$id));
       if ($this->delete->errorCode()!=0){

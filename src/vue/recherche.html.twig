@@ -18,7 +18,7 @@
                             <h5 class="card-title fw-bold">{{ produit.nomProduit }}</h5>
                             <p class="card-text">{{ produit.description }}</p>
                             <p class="card-text fw-bold text-center">Prix: {{ produit.prix }}€</p>
-                            {%if session.login is defined %}
+                            {%if session.login is defined %} <!-- Permet de modifier le produit directement (s'affiche et est utilisable uniquement si on est administrateur) -->
                                 {%if session.role == 1 %}
                                     <a href="index.php?page=produit-modif&id={{ produit.id }}" class="btn btn-primary mt-auto mb-2">Détails (accessible uniquement aux adminstrateurs).</a>
                                 {% endif %}
@@ -32,7 +32,7 @@
                                     {% endif %}         
                                         type="submit" name="btAjoutP">Ajouter au panier</button>
                                     {% if session.login is not defined %}
-                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p>
+                                        <p class="text-danger fw-bold text-center">Veuillez vous connecter pour ajouter ce produit</p> <!-- Si l'utilisateur n'est pas connecté, on désactive le bouton, de toute façon, il ne pourrait pas utiliser le panier -->
                                     {% endif %}   
                                 </div> 
                             </form>

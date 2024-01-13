@@ -1,5 +1,5 @@
 <?php
-function ordinateursControleur($twig, $db) {
+function ordinateursControleur($twig, $db){
     $recherche = new Recherche($db);
     $resultatsOrdinateurs = array();
     $resultatsLaptops = array();

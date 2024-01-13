@@ -29,7 +29,7 @@ $lesPages['type-modif'] = "typeModifControleur;1";
 
 // Contrôleurs liés aux produits (Accessible uniquement aux admins)
 $lesPages['produit'] = "produitControleur;1";
-$lesPages['produit-liste-pdf'] = "produitListePdfControleur;1";
+$lesPages['produit-liste-pdf'] = "produitListePdfControleur;1"; // Non fonctionnel (TP sur html2pdf commencé, mais pas terminé)
 $lesPages['produit-modif'] = "produitModifControleur;1";
 $lesPages['produit-ajout'] = "produitAjoutControleur;1";
 

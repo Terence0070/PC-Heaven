@@ -26,7 +26,7 @@ class Recherche {
         $this->RechercheGenerale = $db->prepare("SELECT p.id, nomProduit, description, prix, photo, t.libelle as type FROM produit p, type t WHERE p.idType = t.id AND nomProduit LIKE :recherche ORDER BY nomProduit");
     }
 
-    public function rechercheOrdinateur($recherche) {
+    public function rechercheOrdinateur($recherche) { // Permet de rechercher précisément un produit dont l'idType correspond aux ordinateurs
         $this->RechercheOrdinateur->execute(array('recherche' => '%' . $recherche . '%'));
         
         if ($this->RechercheOrdinateur->errorCode() != 0) {
@@ -35,7 +35,7 @@ class Recherche {
         return $this->RechercheOrdinateur->fetchAll();
     }
 
-    public function rechercheLaptop($recherche) {
+    public function rechercheLaptop($recherche) { // Permet de rechercher précisément un produit dont l'idType correspond aux laptops
         $this->RechercheLaptop->execute(array('recherche' => '%' . $recherche . '%'));
 
         if ($this->RechercheLaptop->errorCode() != 0) {
@@ -44,7 +44,7 @@ class Recherche {
         return $this->RechercheLaptop->fetchAll();
     }
 
-    public function rechercheCPU($recherche) {
+    public function rechercheCPU($recherche) { // Permet de rechercher précisément un produit dont l'idType correspond aux CPU
         $this->RechercheCPU->execute(array('recherche' => '%' . $recherche . '%'));
 
         if ($this->RechercheCPU->errorCode() != 0) {
@@ -53,7 +53,7 @@ class Recherche {
         return $this->RechercheCPU->fetchAll();
     }
 
-    public function rechercheGPU($recherche) {
+    public function rechercheGPU($recherche) { // Permet de rechercher précisément un produit dont l'idType correspond aux GPU
         $this->RechercheGPU->execute(array('recherche' => '%' . $recherche . '%'));
 
         if ($this->RechercheGPU->errorCode() != 0) {
@@ -62,7 +62,7 @@ class Recherche {
         return $this->RechercheGPU->fetchAll();
     }
 
-    public function rechercheRAM($recherche) {
+    public function rechercheRAM($recherche) {  // Permet de rechercher précisément un produit dont l'idType correspond à la RAM
         $this->RechercheRAM->execute(array('recherche' => '%' . $recherche . '%'));
 
         if ($this->RechercheRAM->errorCode() != 0) {
@@ -71,7 +71,7 @@ class Recherche {
         return $this->RechercheRAM->fetchAll();
     }
 
-    public function rechercheHDD($recherche) {
+    public function rechercheHDD($recherche) {  // Permet de rechercher précisément un produit dont l'idType correspond aux HDD
         $this->RechercheHDD->execute(array('recherche' => '%' . $recherche . '%'));
 
         if ($this->RechercheHDD->errorCode() != 0) {

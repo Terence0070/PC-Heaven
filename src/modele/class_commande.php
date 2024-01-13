@@ -10,7 +10,7 @@ class Commande {
         $this->selectByDateCli = $db->prepare("SELECT id FROM commande WHERE date = :date AND idUtilisateur = :idUtilisateur");
     }
 
-    public function insert($montant, $date, $etat, $idUtilisateur) {
+    public function insert($montant, $date, $etat, $idUtilisateur) { // Permet d'insérer la commande dans la base de données
         $r = true;
     
         // Vérifier si $idUtilisateur n'est pas nul avant d'exécuter la requête

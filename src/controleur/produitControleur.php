@@ -3,7 +3,7 @@ function produitControleur($twig, $db){
     $form = array();
     $produit = new Produit($db);
 
-    if(isset($_POST['btSupprimer'])){
+    if(isset($_POST['btSupprimer'])){ // Permet de supprimer un produit de la liste des produits (disponible quand on est administrateur)
         $cocher = $_POST['cocher'];
         $form['valide'] = true;
         $etat = true;
@@ -50,11 +50,10 @@ function produitControleur($twig, $db){
     $form['nbpages'] = ceil($nb / $limite);
     $form['nopage'] = $nopage;
 
-    // $liste = $produit->select(); // On en a plus besoin de ce bout de code (qui affichait complètement la liste, ce qui peut être désagréable si la liste des items devient très longue.)
     echo $twig->render('produit.html.twig', array('form'=>$form,'liste'=>$liste));
 }
 
-function produitAjoutControleur($twig, $db) {
+function produitAjoutControleur($twig, $db) { // Permet d'ajouter un produit dans la liste des produits (disponible quand on est administrateur)
     $form = array();
     $type = new Type($db);
     $listeT = $type->select();
@@ -90,7 +89,7 @@ function produitAjoutControleur($twig, $db) {
         "listeT" => $listeT));
 }
 
-function produitModifControleur($twig, $db) {
+function produitModifControleur($twig, $db) {  // Permet de modifier un produit dans la liste des produits (disponible quand on est administrateur)
     $form = array();
     $type = new Type($db); // Instancie l'objet $type
     $listeT = $type->select();
@@ -101,7 +100,7 @@ function produitModifControleur($twig, $db) {
     
         if ($unProduit !== null) {
             $form['produit'] = $unProduit;
-            $type = new Type($db); // Instancie l'objet $type
+            $type = new Type($db);
             $listeT = $type->select();
             $form['type']=$listeT;
         } else {
@@ -110,10 +109,10 @@ function produitModifControleur($twig, $db) {
     } else {
         if (isset($_POST['btModifier'])) {
             $produit = new Produit($db);
-            $nomProduit = $_POST['nomProduit']; // Modifié en fonction de ton formulaire
-            $description = $_POST['description']; // Modifié en fonction de ton formulaire
-            $prix = $_POST['prix']; // Modifié en fonction de ton formulaire
-            $idType = $_POST['inputCtg']; // Modifié en fonction de ton formulaire
+            $nomProduit = $_POST['nomProduit'];
+            $description = $_POST['description'];
+            $prix = $_POST['prix'];
+            $idType = $_POST['inputCtg'];
             $id = $_POST['id'];
         
             $exec1 = $produit->update($nomProduit, $description, $prix, $idType, $id);

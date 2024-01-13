@@ -1,10 +1,9 @@
 <?php
-function panierControleur($twig, $db)
-{
+function panierControleur($twig, $db){
     $form = array();
     $liste = array();
 
-    if (isset($_POST['placerCommade'])) {
+    if (isset($_POST['placerCommade'])) { // Permet de valider la commande et de tout enregistre sur la base de données.
         $montant = $_POST['montant'];
         $aujourdhui = new DateTime();
         $aujourdhui->setTimezone(new DateTimeZone('Europe/Paris'));
@@ -40,13 +39,13 @@ function panierControleur($twig, $db)
             unset($_SESSION['panier']);
         }
     } else {
-        if (!empty($_SESSION['panier'])) {
+        if (!empty($_SESSION['panier'])) { // Prépare le panier s'il n'a pas encore été mis en place
             $ids = array_keys($_SESSION['panier']);
             $produits = new Produit($db);
             $liste = $produits->selectIn($ids);
         }
 
-        if (isset($_POST['btAjoutP'])) {
+        if (isset($_POST['btAjoutP'])) { // Permet d'ajouter davantage de produits dans la page panier.html.twig
             $produitId = $_POST['id'];
 
             if (!isset($_SESSION['panier'][$produitId])) {
@@ -59,13 +58,13 @@ function panierControleur($twig, $db)
             exit();
         }
 
-        if (isset($_GET['remove'])) {
+        if (isset($_GET['remove'])) { // Permet de retirer quelque chose du panier
             unset($_SESSION['panier'][$_GET['remove']]);
             header("Location: index.php?page=panier");
             exit();
         }
 
-        if (isset($_POST['update'])) {
+        if (isset($_POST['update'])) { // Permet de mettre à jour le panier si l'utilisateur modifie le nombre d'exemplaires dans son panier
             foreach ($_POST as $k => $v) {
                 if (strpos($k, 'q-') !== false) {
                     $explose = explode('-', $k);

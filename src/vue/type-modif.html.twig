@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
     {% block title %} {{ parent() }} Modifier un utilisateur {% endblock %}
-        {% block contenu %}
+        {% block contenu %} <!-- Permet de modifier le champ du type déjà enregistré -->
                 {% if form.type is defined %}
                     {% if form.type != null %}
                         <div class="container rounded border col-lg-6 col-md-9 col-sm-12 mt-3">
