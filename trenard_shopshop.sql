@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 08 jan. 2024 à 08:51
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Généré le : sam. 13 jan. 2024 à 02:16
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,63 +29,26 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `montant` decimal(10,2) NOT NULL,
   `date` datetime NOT NULL,
-  `etat` int(11) NOT NULL,
-  `idUtilisateur` int(11) NOT NULL,
+  `etat` int NOT NULL,
+  `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_util` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`id`, `montant`, `date`, `etat`, `idUtilisateur`) VALUES
-(2, '3000.00', '2024-01-07 02:47:33', 1, 29),
-(3, '5300.00', '2024-01-07 03:00:15', 1, 29),
-(4, '5300.00', '2024-01-07 03:00:18', 1, 29),
-(5, '800.00', '2024-01-07 03:00:44', 1, 29),
-(6, '900.00', '2024-01-07 03:01:15', 1, 29),
-(7, '900.00', '2024-01-07 03:04:20', 1, 29),
-(8, '900.00', '2024-01-07 03:04:22', 1, 29),
-(9, '800.00', '2024-01-07 03:04:43', 1, 29),
-(10, '800.00', '2024-01-07 03:04:46', 1, 29),
-(11, '800.00', '2024-01-07 03:04:47', 1, 29),
-(12, '800.00', '2024-01-07 03:07:05', 1, 29),
-(13, '3200.00', '2024-01-07 03:07:16', 1, 29),
-(14, '3200.00', '2024-01-07 03:07:19', 1, 29),
-(15, '3200.00', '2024-01-07 03:07:19', 1, 29),
-(16, '3200.00', '2024-01-07 03:07:20', 1, 29),
-(17, '3200.00', '2024-01-07 03:07:20', 1, 29),
-(18, '3200.00', '2024-01-07 03:07:20', 1, 29),
-(19, '3200.00', '2024-01-07 03:07:21', 1, 29),
-(20, '800.00', '2024-01-07 03:07:53', 1, 29),
-(21, '800.00', '2024-01-07 03:08:00', 1, 29),
-(22, '800.00', '2024-01-07 03:10:07', 1, 29),
-(23, '800.00', '2024-01-07 03:10:14', 1, 29),
-(24, '1500.00', '2024-01-07 03:13:12', 1, 29),
-(25, '1500.00', '2024-01-07 03:13:21', 1, 29),
-(26, '1500.00', '2024-01-07 03:18:58', 1, 29),
-(27, '800.00', '2024-01-07 03:19:04', 1, 29),
-(28, '800.00', '2024-01-07 03:19:35', 1, 29),
-(29, '800.00', '2024-01-07 03:20:37', 1, 29),
-(30, '800.00', '2024-01-07 03:20:53', 1, 29),
-(31, '800.00', '2024-01-07 03:26:52', 1, 29),
-(32, '3200.00', '2024-01-07 03:30:09', 1, 29),
-(33, '3200.00', '2024-01-07 03:31:07', 1, 29),
-(34, '46000.00', '2024-01-07 03:35:36', 1, 29),
-(35, '800.00', '2024-01-07 03:36:42', 1, 29),
-(36, '1600.00', '2024-01-07 03:39:06', 1, 29),
-(37, '800.00', '2024-01-07 03:40:22', 1, 29),
 (38, '1500.00', '2024-01-07 04:00:39', 1, 31),
 (39, '1500.00', '2024-01-07 04:05:32', 1, 31),
 (40, '1500.00', '2024-01-07 04:07:50', 1, 31),
-(41, '7500.00', '2024-01-08 08:43:04', 1, 31),
-(42, '1500.00', '2024-01-08 08:43:14', 1, 31),
-(43, '800.00', '2024-01-08 08:54:59', 1, 31),
-(44, '800.00', '2024-01-08 08:56:00', 1, 31);
+(41, '800.00', '2024-01-07 05:28:30', 1, 31),
+(42, '3400.00', '2024-01-07 15:25:47', 1, 31),
+(43, '2200.00', '2024-01-13 03:13:24', 1, 35);
 
 -- --------------------------------------------------------
 
@@ -95,47 +58,25 @@ INSERT INTO `commande` (`id`, `montant`, `date`, `etat`, `idUtilisateur`) VALUES
 
 DROP TABLE IF EXISTS `composer`;
 CREATE TABLE IF NOT EXISTS `composer` (
-  `idCommande` int(11) NOT NULL,
-  `idProduit` int(11) NOT NULL,
-  `quantite` int(11) NOT NULL,
+  `idCommande` int NOT NULL,
+  `idProduit` int NOT NULL,
+  `quantite` int NOT NULL,
   PRIMARY KEY (`idCommande`,`idProduit`),
   KEY `fk_produit` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `composer`
 --
 
 INSERT INTO `composer` (`idCommande`, `idProduit`, `quantite`) VALUES
-(3, 142, 1),
-(3, 143, 3),
-(5, 142, 1),
-(6, 123, 1),
-(6, 140, 5),
-(9, 142, 1),
-(13, 142, 4),
-(20, 142, 1),
-(23, 142, 1),
-(24, 143, 1),
-(27, 142, 1),
-(28, 142, 1),
-(29, 142, 1),
-(30, 142, 1),
-(31, 142, 1),
-(32, 142, 4),
-(34, 140, 20),
-(34, 142, 55),
-(35, 142, 1),
-(36, 142, 2),
-(37, 142, 1),
 (38, 143, 1),
 (39, 123, 3),
 (39, 136, 5),
-(41, 143, 5),
-(42, 129, 1),
-(42, 140, 1),
+(41, 142, 1),
 (42, 141, 1),
-(43, 142, 1);
+(42, 142, 4),
+(43, 145, 4);
 
 -- --------------------------------------------------------
 
@@ -145,15 +86,15 @@ INSERT INTO `composer` (`idCommande`, `idProduit`, `quantite`) VALUES
 
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nomProduit` varchar(150) NOT NULL,
   `description` text NOT NULL,
   `prix` float NOT NULL,
-  `idType` int(11) NOT NULL,
+  `idType` int NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idType` (`idType`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `produit`
@@ -187,10 +128,10 @@ INSERT INTO `produit` (`id`, `nomProduit`, `description`, `prix`, `idType`, `pho
 
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `role`
@@ -208,10 +149,10 @@ INSERT INTO `role` (`id`, `libelle`) VALUES
 
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `type`
@@ -237,26 +178,27 @@ INSERT INTO `type` (`id`, `libelle`) VALUES
 
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `mdp` varchar(999) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
-  `idRole` int(11) NOT NULL,
+  `idRole` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `idRole` (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `email`, `mdp`, `nom`, `prenom`, `idRole`) VALUES
-(19, 'terencevraivraivrai@gmail.com', '$2y$10$QFkqYYFMlciUOLwaZi71beuPzDdQtoK7jC5Nf0A0FNe0PQLK5DASi', 'teteaaa', 'tete', 1),
-(29, 'terencelevrai@gmail.com', '$2y$10$L6oirjx7U1x//PnVg.7HAea2vXjUxvyO3a//CUB/hSYTYxNTXICRW', 'bbbbbb', 'bbbbbb', 1),
+(30, 'client@gmail.com', '$2y$10$exnhL6KxaKZRKvhu9P3Fx.o2.X6H9thjWbLmVLatGfnHhBnHAsHG.', 'aaaa', 'aaaa', 2),
 (31, 'client1@gmail.com', '$2y$10$zxWept8ZDezS5FhyO3mP/.nfcuuiDXdAjR3S/JhtdIh7C.tqViIRu', 'Renard', 'Terence', 2),
-(32, 'terenceclasse@gmail.com', '$2y$10$NMfjxcCkXrFNH0f5tRBY0.pBX4vX2664bN1uyj7WYzaU6ttRdvipG', 'lol', 'lol', 1);
+(32, 'admin1@gmail.com', '$2y$10$ovCAwbhbvd55k6JZB/V/Gea/BbYfyE/nO9tNHoI.lbZKNfhl0bA0m', 'Renard', 'Terence', 1),
+(34, 'clientaaa@gmail.com', '$2y$10$pf8BXO8zgMAh0J8JfR8/4uVqdSvsxCkQ5WZotpsXI0rjigljjoloy', 'aaa', 'aaa', 2),
+(35, 'clientbbb@gmail.com', '$2y$10$4b5Jl5WHWw6f1MrdpydA6ez2K2f.BwYu0qmlUnMj.jnd3xpuLOPzO', 'aaaa', 'aaaaa', 2);
 
 --
 -- Contraintes pour les tables déchargées
@@ -266,14 +208,14 @@ INSERT INTO `utilisateur` (`id`, `email`, `mdp`, `nom`, `prenom`, `idRole`) VALU
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `fk_util` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `fk_util` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `composer`
 --
 ALTER TABLE `composer`
-  ADD CONSTRAINT `fk_commande` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`),
-  ADD CONSTRAINT `fk_produit` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`);
+  ADD CONSTRAINT `fk_commande` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_produit` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `produit`
