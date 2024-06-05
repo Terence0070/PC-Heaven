@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : sam. 13 jan. 2024 à 02:16
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Hôte : localhost
+-- Généré le : mer. 05 juin 2024 à 11:32
+-- Version du serveur : 10.5.23-MariaDB-0+deb11u1
+-- Version de PHP : 8.3.3-1+0~20240216.17+debian11~1.gbp87e37b
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,28 +27,13 @@ SET time_zone = "+00:00";
 -- Structure de la table `commande`
 --
 
-DROP TABLE IF EXISTS `commande`;
-CREATE TABLE IF NOT EXISTS `commande` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commande` (
+  `id` int(11) NOT NULL,
   `montant` decimal(10,2) NOT NULL,
   `date` datetime NOT NULL,
-  `etat` int NOT NULL,
-  `idUtilisateur` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_util` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `commande`
---
-
-INSERT INTO `commande` (`id`, `montant`, `date`, `etat`, `idUtilisateur`) VALUES
-(38, '1500.00', '2024-01-07 04:00:39', 1, 31),
-(39, '1500.00', '2024-01-07 04:05:32', 1, 31),
-(40, '1500.00', '2024-01-07 04:07:50', 1, 31),
-(41, '800.00', '2024-01-07 05:28:30', 1, 31),
-(42, '3400.00', '2024-01-07 15:25:47', 1, 31),
-(43, '2200.00', '2024-01-13 03:13:24', 1, 35);
+  `etat` int(11) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -56,27 +41,11 @@ INSERT INTO `commande` (`id`, `montant`, `date`, `etat`, `idUtilisateur`) VALUES
 -- Structure de la table `composer`
 --
 
-DROP TABLE IF EXISTS `composer`;
-CREATE TABLE IF NOT EXISTS `composer` (
-  `idCommande` int NOT NULL,
-  `idProduit` int NOT NULL,
-  `quantite` int NOT NULL,
-  PRIMARY KEY (`idCommande`,`idProduit`),
-  KEY `fk_produit` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `composer`
---
-
-INSERT INTO `composer` (`idCommande`, `idProduit`, `quantite`) VALUES
-(38, 143, 1),
-(39, 123, 3),
-(39, 136, 5),
-(41, 142, 1),
-(42, 141, 1),
-(42, 142, 4),
-(43, 145, 4);
+CREATE TABLE `composer` (
+  `idCommande` int(11) NOT NULL,
+  `idProduit` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -84,17 +53,14 @@ INSERT INTO `composer` (`idCommande`, `idProduit`, `quantite`) VALUES
 -- Structure de la table `produit`
 --
 
-DROP TABLE IF EXISTS `produit`;
-CREATE TABLE IF NOT EXISTS `produit` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL,
   `nomProduit` varchar(150) NOT NULL,
   `description` text NOT NULL,
   `prix` float NOT NULL,
-  `idType` int NOT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idType` (`idType`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=latin1;
+  `idType` int(11) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Déchargement des données de la table `produit`
@@ -126,12 +92,10 @@ INSERT INTO `produit` (`id`, `nomProduit`, `description`, `prix`, `idType`, `pho
 -- Structure de la table `role`
 --
 
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `role`
@@ -147,12 +111,10 @@ INSERT INTO `role` (`id`, `libelle`) VALUES
 -- Structure de la table `type`
 --
 
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE IF NOT EXISTS `type` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+CREATE TABLE `type` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Déchargement des données de la table `type`
@@ -176,29 +138,101 @@ INSERT INTO `type` (`id`, `libelle`) VALUES
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `mdp` varchar(999) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
-  `idRole` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  KEY `idRole` (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+  `idRole` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `email`, `mdp`, `nom`, `prenom`, `idRole`) VALUES
-(30, 'client@gmail.com', '$2y$10$exnhL6KxaKZRKvhu9P3Fx.o2.X6H9thjWbLmVLatGfnHhBnHAsHG.', 'aaaa', 'aaaa', 2),
-(31, 'client1@gmail.com', '$2y$10$zxWept8ZDezS5FhyO3mP/.nfcuuiDXdAjR3S/JhtdIh7C.tqViIRu', 'Renard', 'Terence', 2),
-(32, 'admin1@gmail.com', '$2y$10$ovCAwbhbvd55k6JZB/V/Gea/BbYfyE/nO9tNHoI.lbZKNfhl0bA0m', 'Renard', 'Terence', 1),
-(34, 'clientaaa@gmail.com', '$2y$10$pf8BXO8zgMAh0J8JfR8/4uVqdSvsxCkQ5WZotpsXI0rjigljjoloy', 'aaa', 'aaa', 2),
-(35, 'clientbbb@gmail.com', '$2y$10$4b5Jl5WHWw6f1MrdpydA6ez2K2f.BwYu0qmlUnMj.jnd3xpuLOPzO', 'aaaa', 'aaaaa', 2);
+(36, 'admin@gmail.com', '$2y$10$PYGVm.lvRcaITrset3F9NuIK8v6YO1rt7OlDVB4sHfJ1hzPuJUSOq', 'admin', 'admin', 1),
+(37, 'client@gmail.com', '$2y$10$71/iA26LLYr1djDD9wXSAO3ecqV2FozagUfWOHAdphmmBTryEl3SK', 'client', 'client', 2);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_util` (`idUtilisateur`);
+
+--
+-- Index pour la table `composer`
+--
+ALTER TABLE `composer`
+  ADD PRIMARY KEY (`idCommande`,`idProduit`),
+  ADD KEY `fk_produit` (`idProduit`);
+
+--
+-- Index pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idType` (`idType`);
+
+--
+-- Index pour la table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `idRole` (`idRole`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+
+--
+-- AUTO_INCREMENT pour la table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Contraintes pour les tables déchargées
@@ -215,7 +249,7 @@ ALTER TABLE `commande`
 --
 ALTER TABLE `composer`
   ADD CONSTRAINT `fk_commande` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_produit` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_produit` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`id`);
 
 --
 -- Contraintes pour la table `produit`
